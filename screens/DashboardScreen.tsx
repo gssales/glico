@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import { Button, StyleSheet } from 'react-native';
 
 import { Text, View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
@@ -8,6 +8,7 @@ export default function DashboardScreen({ navigation }: RootTabScreenProps<'Dash
   return (
     <View style={styles.container}>
       <Text>Dashboard</Text>
+      <Button title="Go to Food Finder" onPress={() => navigation.navigate('FoodFinder')} />
     </View>
   )
 }
