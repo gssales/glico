@@ -9,16 +9,24 @@ import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
 import { Pressable } from 'react-native';
+import { View } from '../components/Themed';
 
 import Colors from '../constants/Colors';
-import DashboardScreen from '../screens/Dashboard';
+import DashboardScreen from '../screens/DashboardScreen';
 import ModalScreen from '../screens/ModalScreen';
-import NewEntryScreen from '../screens/NewEntry';
+import EditEntryScreen from '../screens/EditEntryScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import TabOneScreen from '../screens/TabOneScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
+import ViewEntryScreen from '../screens/ViewEntryScreen';
+import MealBuilderScreen from '../screens/MealBuilderScreen';
+import FoodFinderScreen from '../screens/FoodFinderScreen';
+import UserRegisterScreen from '../screens/UserRegisterScreen';
+import CalculatorScreen from '../screens/CalculatorScreen';
+import HistoryScreen from '../screens/HistoryScreen';
+import UserProfileScreen from '../screens/UserProfileScreen';
 
 export default function Navigation() {
   return (
@@ -40,11 +48,11 @@ function RootNavigator() {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
-      <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
-      <Stack.Group screenOptions={{ presentation: 'modal' }}>
-        <Stack.Screen name="Modal" component={ModalScreen} />
-      </Stack.Group>
-      <Stack.Screen name="NewEntry" component={NewEntryScreen} options={{ title: 'Novo Registro' }} />
+      <Stack.Screen name="EditEntry" component={EditEntryScreen} options={{ title: 'Novo Registro' }} />
+      <Stack.Screen name="ViewEntry" component={ViewEntryScreen} options={{ title: 'Detalhes do Registro' }} />
+      <Stack.Screen name="MealBuilder" component={MealBuilderScreen} options={{ title: 'Refeição' }} />
+      <Stack.Screen name="FoodFinder" component={FoodFinderScreen} options={{ title: 'Escolher Alimento' }} />
+      <Stack.Screen name="UserRegister" component={UserRegisterScreen} options={{ title: 'Cadastro de Usuário' }} />
     </Stack.Navigator>
   );
 }
@@ -66,10 +74,11 @@ function BottomTabNavigator() {
         <BottomTab.Screen
           name="Dashboard"
           component={DashboardScreen}
-          options={({ navigation }: RootTabScreenProps<'Dashboard'>) => ({
-            headerShown: false,
-          })} />
-      <BottomTab.Screen
+          options={{ headerShown: false }} />
+        <BottomTab.Screen name="Calculator" component={CalculatorScreen} />
+        <BottomTab.Screen name="History" component={HistoryScreen} />
+        <BottomTab.Screen name="UserProfile" component={UserProfileScreen} />
+      {/* <BottomTab.Screen
         name="TabOne"
         component={TabOneScreen}
         options={({ navigation }: RootTabScreenProps<'TabOne'>) => ({
@@ -98,7 +107,7 @@ function BottomTabNavigator() {
           title: 'Tab Two',
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
         }}
-      />
+      /> */}
     </BottomTab.Navigator>
   );
 }

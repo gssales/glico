@@ -4,10 +4,10 @@ import { StyleSheet } from 'react-native';
 import { Text, View } from '../components/Themed';
 import { RootStackScreenProps } from '../types';
 
-export default function NewEntryScreen({ navigation }: RootStackScreenProps<'NotFound'>) {
+export default function MealBuilderScreen({ navigation }: RootStackScreenProps<'MealBuilder'>) {
   return (
     <View style={styles.container}>
-      <Text>New Entry</Text>
+      <Text>Meal Builder</Text>
     </View>
   )
 }
