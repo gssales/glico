@@ -8,4 +8,7 @@ export default {
   tabIconDefault: '#ccc',
   tabIconSelected: tintColorLight,
   blue: '#5f7fee',
+  backgroundGlucose: '#2FC53E',
+  backgroundBolus: '#5563E4',
+  backgroundCarbs: '#CDD020',
 };

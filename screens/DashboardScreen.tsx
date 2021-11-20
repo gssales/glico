@@ -4,6 +4,7 @@ import { Button, Dimensions, StyleSheet } from 'react-native';
 import { Text, View, Chart } from '../components/Themed';
 import Colors from '../constants/Colors';
 import { RootTabScreenProps } from '../types';
+import LastEntryView from '../components/LastEntryView/LastEntryView';
 
 export default function DashboardScreen({ navigation }: RootTabScreenProps<'Dashboard'>) {
   return (
@@ -29,7 +30,7 @@ export default function DashboardScreen({ navigation }: RootTabScreenProps<'Dash
         height={220}
         bezier
       />
-      <Button title="Go to Food Finder" onPress={() => navigation.navigate('FoodFinder')} />
+      <LastEntryView />
     </View>
   )
 }

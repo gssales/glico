@@ -43,13 +43,16 @@ export function Chart(props: LineChartProps) {
       decimalPlaces: 0,
       color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
       labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+      propsForLabels: {
+        fontFamily: '"Segoe UI", Roboto, Helvetica, Arial, sans-serif',
+      },
       propsForDots: {
         r: "4",
         strokeWidth: "2",
         stroke: "#E4E6FA"
       },
       propsForVerticalLabels: {
-        fontSize: 14,
+        fontSize: 18,
       }, ...chartConfig
     }}
     {...otherProps} />;
