@@ -3,21 +3,15 @@
  * https://reactnavigation.org/docs/getting-started
  *
  */
-import { FontAwesome } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
-import { Pressable } from 'react-native';
-import { View } from '../components/Themed';
 
 import Colors from '../constants/Colors';
 import DashboardScreen from '../screens/DashboardScreen';
-import ModalScreen from '../screens/ModalScreen';
 import EditEntryScreen from '../screens/EditEntryScreen';
-import NotFoundScreen from '../screens/NotFoundScreen';
-import TabOneScreen from '../screens/TabOneScreen';
-import TabTwoScreen from '../screens/TabTwoScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 import ViewEntryScreen from '../screens/ViewEntryScreen';
@@ -69,15 +63,38 @@ function BottomTabNavigator() {
     <BottomTab.Navigator
       initialRouteName="Dashboard"
       screenOptions={{
-        tabBarActiveTintColor: Colors.tint,
+        tabBarStyle: { backgroundColor: Colors.blue },
+        tabBarInactiveTintColor: "#bbb",
+        tabBarActiveTintColor: 'white',
       }}>
         <BottomTab.Screen
           name="Dashboard"
           component={DashboardScreen}
-          options={{ headerShown: false }} />
-        <BottomTab.Screen name="Calculator" component={CalculatorScreen} />
-        <BottomTab.Screen name="History" component={HistoryScreen} />
-        <BottomTab.Screen name="UserProfile" component={UserProfileScreen} />
+          options={{ 
+            headerShown: false,
+            tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />
+          }} />
+        <BottomTab.Screen 
+          name="Calculator" 
+          component={CalculatorScreen}
+          options={{ 
+            headerShown: false,
+            tabBarIcon: ({ color }) => <TabBarIcon name="calculate" color={color} />
+          }} />
+        <BottomTab.Screen 
+          name="History" 
+          component={HistoryScreen}
+          options={{ 
+            headerShown: false,
+            tabBarIcon: ({ color }) => <TabBarIcon name="assessment" color={color} />
+          }} />
+        <BottomTab.Screen 
+          name="UserProfile"
+          component={UserProfileScreen}
+          options={{ 
+            headerShown: false,
+            tabBarIcon: ({ color }) => <TabBarIcon name="face" color={color} />
+          }} />
       {/* <BottomTab.Screen
         name="TabOne"
         component={TabOneScreen}
@@ -116,8 +133,8 @@ function BottomTabNavigator() {
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
  */
 function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name'];
+  name: React.ComponentProps<typeof MaterialIcons>['name'];
   color: string;
 }) {
-  return <FontAwesome size={30} style={{ marginBottom: -3 }} {...props} />;
+  return <MaterialIcons size={30} style={{ marginBottom: -3 }} {...props} />;
 }
