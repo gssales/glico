@@ -9,6 +9,7 @@ export default function DashboardScreen({ navigation }: RootTabScreenProps<'Dash
     <View style={styles.container}>
       <Text>Dashboard</Text>
       <Button title="Go to Food Finder" onPress={() => navigation.navigate('FoodFinder')} />
+      <Button title="Create new register" onPress={() => navigation.navigate('EditEntry')} />
     </View>
   )
 }

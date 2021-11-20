@@ -46,7 +46,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator initialRouteName="EditEntry">
       <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
       <Stack.Screen name="EditEntry" component={EditEntryScreen} options={{ title: 'Novo Registro' }} />
       <Stack.Screen name="ViewEntry" component={ViewEntryScreen} options={{ title: 'Detalhes do Registro' }} />
@@ -71,13 +71,13 @@ function BottomTabNavigator() {
       screenOptions={{
         tabBarActiveTintColor: Colors.tint,
       }}>
-        <BottomTab.Screen
-          name="Dashboard"
-          component={DashboardScreen}
-          options={{ headerShown: false }} />
-        <BottomTab.Screen name="Calculator" component={CalculatorScreen} />
-        <BottomTab.Screen name="History" component={HistoryScreen} />
-        <BottomTab.Screen name="UserProfile" component={UserProfileScreen} />
+      <BottomTab.Screen
+        name="Dashboard"
+        component={DashboardScreen}
+        options={{ headerShown: false }} />
+      <BottomTab.Screen name="Calculator" component={CalculatorScreen} />
+      <BottomTab.Screen name="History" component={HistoryScreen} />
+      <BottomTab.Screen name="UserProfile" component={UserProfileScreen} />
       {/* <BottomTab.Screen
         name="TabOne"
         component={TabOneScreen}
