@@ -25,6 +25,7 @@ export const Schemas = [
       { name: 'glucose', type: 'INTEGER', },
       { name: 'insulin_bc', type: 'REAL', }, 
       { name: 'insulin_br', type: 'REAL', }, 
+      { name: 'meal', type: 'TEXT', }, 
       { name: 'meal_carbs', type: 'REAL', }, 
       { name: 'annotations', type: 'TEXT', },
     ],

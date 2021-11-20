@@ -32,7 +32,7 @@ export default function ValueView({ value, type, size = 'medium' }: ValueViewPro
           styles.value, 
           styles[`value_${size}`]
         ]}>
-        {value}
+        {Math.round(value*10)/10}
       </Text>
       <Text 
         style={[
@@ -60,8 +60,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   container_small: {
-    width: 38,
-    height: 38,
+    width: 48,
+    height: 48,
     borderRadius: 16,
   },
   container_medium: {
@@ -82,7 +82,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   value_small: {
-    fontSize: 16,
+    fontSize: 22,
+    lineHeight: 22,
   },
   value_medium: {
     fontSize: 24,
@@ -97,8 +98,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   measure_small: {
-    fontSize: 10,
-    lineHeight: 10
+    fontSize: 14,
+    lineHeight: 14
   },
   measure_medium: {
     fontSize: 14,
