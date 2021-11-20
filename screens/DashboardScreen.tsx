@@ -5,11 +5,16 @@ import { Text, View, Chart } from '../components/Themed';
 import Colors from '../constants/Colors';
 import { RootTabScreenProps } from '../types';
 import LastEntryView from '../components/LastEntryView/LastEntryView';
+import History from '../components/History/History';
+import { FAB } from 'react-native-elements';
+import { MaterialIcons } from '@expo/vector-icons';
 
 export default function DashboardScreen({ navigation }: RootTabScreenProps<'Dashboard'>) {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Olá, João</Text>
+      <View>
+        <Text style={styles.title}>Olá, João</Text>
+      </View>
       <Chart
         data={{
           labels: ["00:00", "06:00", "12:00", "18:00", "00:00"],
@@ -27,10 +32,16 @@ export default function DashboardScreen({ navigation }: RootTabScreenProps<'Dash
           ]
         }}
         width={Dimensions.get("window").width}
-        height={220}
+        height={180}
         bezier
       />
       <LastEntryView />
+      <History />
+      <FAB 
+        color={'#1BB55C'} 
+        placement='right' 
+        title={<MaterialIcons name="add" color="#fff" size={30}/>}
+        onPress={() => navigation.navigate('EditEntry')}/>
     </View>
   )
 }
