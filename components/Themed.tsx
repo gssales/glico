@@ -33,7 +33,7 @@ export function View(props: ViewProps) {
 }
 
 export function Chart(props: LineChartProps) {
-  const { style, chartConfig, ...otherProps} = props;
+  const { chartConfig, ...otherProps} = props;
 
   return <LineChart
     chartConfig={{
