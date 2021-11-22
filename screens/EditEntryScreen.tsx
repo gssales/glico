@@ -1,45 +1,55 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform, Button } from 'react-native';
 
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Text, View } from '../components/Themed';
 import { RootStackScreenProps } from '../types';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
-const DEFAULT_ENTRY_FORM = {
-  time: '',
-  date: '',
-  blood_glucose: '',
-  carbohydrates: '',
-  meal_type: '',
-  insulin_meal_dose: '',
-  insulin_correction_dose: '',
-  observations: '',
-  tags: ''
-}
+
 
 export default function EditEntryScreen({ navigation }: RootStackScreenProps<'EditEntry'>) {
 
-  const [formInputEntry, setFormInputEntry] = useState(DEFAULT_ENTRY_FORM)
+  const [date, setDate] = useState(new Date(Date.now()))
+  const [mode, setMode] = useState('date')
+  const [show, setShow] = useState(false)
+  const [text, setText] = useState('Empty')
 
-  useEffect(() => {
-    const hour = new Date().getDate()
-    const minutes = new Date().getMinutes()
-    const current_time = `${hour + 1}:${minutes}`
-    const target = 'time'
-    setFormInputEntry(currentValues => ({
-      ...currentValues,
-      [target]: current_time,
-    }))
-  })
+  function onChange(event: any, selectedDate: Date) {
+    const currentDate = selectedDate || date
+    setShow(Platform.OS === 'ios');
+    setDate(currentDate)
+
+    let tempDate = new Date(currentDate)
+    let fDate = tempDate.getDate() + '/' + (tempDate.getMonth() + 1) + '/1' + tempDate.getFullYear()
+    let fTime = tempDate.getHours() + ':' + tempDate.getMinutes()
+    setText(fTime + ' ' + fDate)
+    console.log(fTime + ' ' + fDate)
+  }
+
+  function showMode(currentMode: string) {
+    setShow(true)
+    setMode(currentMode)
+  }
 
   return (
     <View style={styles.container}>
-      <div>
+      <View style={styles.row}>
         <Text>Hora e Data</Text>
-        <Text>{hour + 1} : {minutes}</Text>
-      </div>
+        <Button title="Hora" onPress={() => showMode('time')} />
+        <Button title="Data" onPress={() => showMode('date')} />
+        {show && (
+          <DateTimePicker
+            testID='dateTimePicker'
+            value={date}
+            mode={mode}
+            is24Hour={true}
+            display='default'
+            onChange={onChange} />
+        )}
+      </View>
 
-      <Text>Glicemia</Text>
+
     </View>
   )
 }
@@ -58,4 +68,12 @@ const styles = StyleSheet.create({
     height: 1,
     width: '80%',
   },
+  row: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: '5px',
+    gap: '30px'
+  }
 });
