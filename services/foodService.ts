@@ -10,8 +10,16 @@ export default class FoodService {
   }
 
   async getAll(): Promise<Food[] | any> {
-    const query = "SELECT * FROM Food;"
+    const query = "SELECT * FROM Food ORDER BY name";
     const result = await this.db.runQuery(query);
+    return result[0].rows;
+  }
+
+  async search(term: string): Promise<Food[] | any> {
+    const query = "SELECT * FROM Food WHERE name LIKE ? ORDER BY name";
+    const arg = `%${term}%`;
+    const result = await this.db.runQuery(query, [arg]);
+    console.log(result);
     return result[0].rows;
   }
 

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
+import { Button, Input } from 'react-native-elements';
+import FoodList from '../components/FoodList/FoodList';
 
 import { Text, View } from '../components/Themed';
 import { Food } from '../models/Food';
@@ -8,23 +10,36 @@ import { RootStackScreenProps } from '../types';
 
 export default function FoodFinderScreen({ navigation }: RootStackScreenProps<'FoodFinder'>) {
   const foodService = new FoodService();
-  const [foods, setFoods] = useState<Food[]>();
+  const [foods, setFoods] = useState<Food[]>([]);
+  const [searchTerm, setSearchTerm] = useState('');
   
   useEffect(() => {
     getFoods();
   }, []);
 
   async function getFoods() {
-    const foods: Food[] = await foodService.getAll();
+    let foods: Food[];
+    if (searchTerm.length > 0)
+      foods = await foodService.search(searchTerm);
+    else
+      foods = await foodService.getAll();
+
     setFoods(foods);
   }
 
   return (
     <View style={styles.container}>
-      <Text>Food Finder</Text>
-      { foods?.map( (f, i) => 
-        <Text key={ f.id ? f.id : i }>{f.name}</Text>
-      ) }
+      <View style={styles.searchSection}>
+        <Input
+          containerStyle={styles.inputContainer}
+          placeholder="Pesquisar Alimento"
+          onChangeText={ t => setSearchTerm(t) }/>
+        <Button
+          containerStyle={styles.button}
+          title="Pesquisar"
+          onPress={ () => getFoods() }/>
+      </View>
+      <FoodList foods={foods}/>
     </View>
   );
 }
@@ -35,13 +50,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
+  searchSection: {
+    flexDirection: 'row',
+    width: '100%',
   },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
+  inputContainer: {
+    width: '70%',
   },
+  button: {
+    width: '30%',
+  }
 });
