@@ -41,7 +41,7 @@ export default function DashboardScreen({ navigation }: RootTabScreenProps<'Dash
         color={'#1BB55C'} 
         placement='right' 
         title={<MaterialIcons name="add" color="#fff" size={30}/>}
-        onPress={() => navigation.navigate('EditEntry')}/>
+        onPress={() => navigation.navigate('MealBuilder')}/>
     </View>
   )
 }

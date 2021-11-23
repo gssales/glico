@@ -5,14 +5,15 @@ import { Food } from "../../models/Food";
 
 export interface FoodListProps {
   foods: Food[];
+  onFoodClick: (food: Food) => void;
 }
 
-export default function FoodList({ foods }: FoodListProps) {
+export default function FoodList({ foods, onFoodClick }: FoodListProps) {
   return (
     <FlatList 
       data={foods}
       renderItem={({ item }) => (
-        <ListItem bottomDivider>
+        <ListItem bottomDivider onPress={() => onFoodClick(item)}>
           <ListItem.Title>{ item.name }</ListItem.Title>
         </ListItem>
       )}

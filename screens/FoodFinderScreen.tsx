@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { Button, Input } from 'react-native-elements';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import FoodList from '../components/FoodList/FoodList';
 
 import { Text, View } from '../components/Themed';
@@ -27,6 +28,11 @@ export default function FoodFinderScreen({ navigation }: RootStackScreenProps<'F
     setFoods(foods);
   }
 
+  async function handleOnFoodClick(f: Food) {
+    await AsyncStorage.setItem('selected_food', JSON.stringify(f));
+    navigation.goBack();
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.searchSection}>
@@ -39,7 +45,7 @@ export default function FoodFinderScreen({ navigation }: RootStackScreenProps<'F
           title="Pesquisar"
           onPress={ () => getFoods() }/>
       </View>
-      <FoodList foods={foods}/>
+      <FoodList foods={foods} onFoodClick={handleOnFoodClick}/>
     </View>
   );
 }
