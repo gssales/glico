@@ -19,7 +19,6 @@ export default class FoodService {
     const query = "SELECT * FROM Food WHERE name LIKE ? ORDER BY name";
     const arg = `%${term}%`;
     const result = await this.db.runQuery(query, [arg]);
-    console.log(result);
     return result[0].rows;
   }
 

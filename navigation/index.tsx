@@ -45,7 +45,14 @@ function RootNavigator() {
       <Stack.Screen name="EditEntry" component={EditEntryScreen} options={{ title: 'Novo Registro' }} />
       <Stack.Screen name="ViewEntry" component={ViewEntryScreen} options={{ title: 'Detalhes do Registro' }} />
       <Stack.Screen name="MealBuilder" component={MealBuilderScreen} options={{ title: 'Refeição' }} />
-      <Stack.Screen name="FoodFinder" component={FoodFinderScreen} options={{ title: 'Escolher Alimento' }} />
+      <Stack.Screen 
+        name="FoodFinder"
+        component={FoodFinderScreen}
+        options={{ 
+          title: 'Escolher Alimento',
+          headerTintColor: 'white',
+          headerStyle: { backgroundColor: Colors.blue },
+        }} />
       <Stack.Screen name="UserRegister" component={UserRegisterScreen} options={{ title: 'Cadastro de Usuário' }} />
     </Stack.Navigator>
   );

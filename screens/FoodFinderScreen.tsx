@@ -60,6 +60,7 @@ const styles = StyleSheet.create({
   searchSection: {
     flexDirection: 'row',
     width: '100%',
+    marginTop: 16,
   },
   inputContainer: {
     width: '70%',
