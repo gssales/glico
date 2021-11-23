@@ -60,8 +60,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   container_small: {
-    width: 48,
-    height: 48,
+    width: 52,
+    height: 52,
     borderRadius: 16,
   },
   container_medium: {
@@ -82,8 +82,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   value_small: {
-    fontSize: 22,
-    lineHeight: 22,
+    fontSize: 20,
+    lineHeight: 20,
   },
   value_medium: {
     fontSize: 24,
