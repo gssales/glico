@@ -13,11 +13,19 @@ export default function App() {
   const isLoadingComplete = useCachedResources();
 
   useEffect(() => {
-    const stmt = "drop table if exists Food;"
-    db.runQuery(stmt);
-    db.createTablesFromSchema();
-    (new FoodService()).populate();
+    populateFoodTable();
   }, []);
+
+  async function populateFoodTable() {
+    const service = new FoodService();
+    const count = await service.count();
+    if (count === 0) {
+      const stmt = "drop table if exists Food;"
+      db.runQuery(stmt);
+      db.createTablesFromSchema();
+      service.populate();
+    }
+  }
 
   if (!isLoadingComplete) {
     return null;
