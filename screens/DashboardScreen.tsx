@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { Button, Dimensions, StyleSheet } from 'react-native';
+import React from 'react';
+import { Dimensions, StyleSheet } from 'react-native';
 
 import { Text, View, Chart } from '../components/Themed';
 import Colors from '../constants/Colors';

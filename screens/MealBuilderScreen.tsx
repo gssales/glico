@@ -1,23 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { StyleSheet } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Button } from 'react-native-elements';
 
 import { Text, View } from '../components/Themed';
 import { Food } from '../models/Food';
 import { RootStackScreenProps } from '../types';
+import { RootContext } from '../components/RootContext/RootContext';
 
 export default function MealBuilderScreen({ navigation }: RootStackScreenProps<'MealBuilder'>) {
+  const { selectedFood, setSelectedFood } = useContext(RootContext);
   const [food, setFood] = useState<Food>();
 
   useEffect(() => {
     getFood();
   });
 
-  async function getFood() {
-    const foodJson = await AsyncStorage.getItem('selected_food');
-    if (foodJson !== null)
-      setFood(JSON.parse(foodJson));
+  function getFood() {
+    if (selectedFood != null) {
+      setFood(selectedFood);
+      setSelectedFood(null);
+    }
   }
 
   return (

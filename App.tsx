@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import RootContextWrap from './components/RootContext/RootContext';
 import SQLiteManager from './db/db';
 
 import useCachedResources from './hooks/useCachedResources';
@@ -23,8 +24,10 @@ export default function App() {
   } else {
     return (
       <SafeAreaProvider>
-        <Navigation />
-        <StatusBar />
+        <RootContextWrap>
+          <Navigation />
+          <StatusBar />
+        </RootContextWrap>
       </SafeAreaProvider>
     );
   }

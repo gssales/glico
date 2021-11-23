@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { StyleSheet } from 'react-native';
 import { Button, Input } from 'react-native-elements';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import FoodList from '../components/FoodList/FoodList';
 
 import { Text, View } from '../components/Themed';
 import { Food } from '../models/Food';
 import FoodService from '../services/foodService';
 import { RootStackScreenProps } from '../types';
+import { RootContext } from '../components/RootContext/RootContext';
 
 export default function FoodFinderScreen({ navigation }: RootStackScreenProps<'FoodFinder'>) {
+  const { setSelectedFood } = useContext(RootContext);
   const foodService = new FoodService();
   const [foods, setFoods] = useState<Food[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -28,8 +29,8 @@ export default function FoodFinderScreen({ navigation }: RootStackScreenProps<'F
     setFoods(foods);
   }
 
-  async function handleOnFoodClick(f: Food) {
-    await AsyncStorage.setItem('selected_food', JSON.stringify(f));
+  function handleOnFoodClick(f: Food) {
+    setSelectedFood(f);
     navigation.goBack();
   }
 
