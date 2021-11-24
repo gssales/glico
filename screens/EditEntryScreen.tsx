@@ -159,7 +159,7 @@ export default function EditEntryScreen({ navigation }: RootStackScreenProps<'Ed
 
       <View style={styles.row}>
         <View style={styles.containerColumn}>
-          <Text>Anotações</Text>
+          <Text>Observações</Text>
           <TextInput
             style={{
               padding: 5,

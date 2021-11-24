@@ -3,7 +3,7 @@
  * https://reactnavigation.org/docs/getting-started
  *
  */
-import { FontAwesome } from '@expo/vector-icons';
+import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -18,7 +18,7 @@ import EditEntryScreen from '../screens/EditEntryScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import TabOneScreen from '../screens/TabOneScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
-import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
+import { RootStackParamList, RootStackScreenProps, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 import ViewEntryScreen from '../screens/ViewEntryScreen';
 import MealBuilderScreen from '../screens/MealBuilderScreen';
@@ -48,7 +48,37 @@ function RootNavigator() {
   return (
     <Stack.Navigator initialRouteName="EditEntry">
       <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
-      <Stack.Screen name="EditEntry" component={EditEntryScreen} options={{ title: 'Novo Registro' }} />
+      <Stack.Screen name="EditEntry" component={EditEntryScreen}
+        options={({ navigation }: RootStackScreenProps<'EditEntry'>) => ({
+          title: '',
+          headerBackVisible: false,
+          headerLeft: () => (
+            <Pressable
+              onPress={() => navigation.navigate('Root')}
+              style={({ pressed }) => ({
+                opacity: pressed ? 0.5 : 1,
+              })}>
+              <MaterialIcons
+                name="close"
+                size={25}
+                color={Colors.text}
+                style={{ marginLeft: 15 }} />
+            </Pressable>
+          ),
+          headerRight: () => (
+            <Pressable
+              onPress={() => navigation.navigate('Root')}
+              style={({ pressed }) => ({
+                opacity: pressed ? 0.5 : 1,
+              })}>
+              <MaterialIcons
+                name="save"
+                size={25}
+                color={Colors.text}
+                style={{ marginRight: 15 }} />
+            </Pressable>
+          ),
+        })} />
       <Stack.Screen name="ViewEntry" component={ViewEntryScreen} options={{ title: 'Detalhes do Registro' }} />
       <Stack.Screen name="MealBuilder" component={MealBuilderScreen} options={{ title: 'Refeição' }} />
       <Stack.Screen name="FoodFinder" component={FoodFinderScreen} options={{ title: 'Escolher Alimento' }} />
