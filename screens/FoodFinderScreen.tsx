@@ -8,6 +8,7 @@ import { Food } from '../models/Food';
 import FoodService from '../services/foodService';
 import { RootStackScreenProps } from '../types';
 import { RootContext } from '../components/RootContext/RootContext';
+import Colors from '../constants/Colors';
 
 export default function FoodFinderScreen({ navigation }: RootStackScreenProps<'FoodFinder'>) {
   const { setSelectedFood } = useContext(RootContext);
@@ -56,6 +57,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: Colors.background2,
   },
   searchSection: {
     flexDirection: 'row',
@@ -64,8 +66,11 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     width: '70%',
+    backgroundColor: Colors.background2,
   },
   button: {
     width: '30%',
+    backgroundColor: Colors.background2,
+    padding: 8
   }
 });
