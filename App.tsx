@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import RootContextWrap from './components/RootContext/RootContext';
 import SQLiteManager from './db/db';
 
 import useCachedResources from './hooks/useCachedResources';
@@ -12,19 +13,29 @@ export default function App() {
   const isLoadingComplete = useCachedResources();
 
   useEffect(() => {
-    const stmt = "drop table if exists Food;"
-    db.runQuery(stmt);
-    db.createTablesFromSchema();
-    (new FoodService()).populate();
+    populateFoodTable();
   }, []);
+
+  async function populateFoodTable() {
+    const service = new FoodService();
+    const count = await service.count();
+    if (count === 0) {
+      const stmt = "drop table if exists Food;"
+      db.runQuery(stmt);
+      db.createTablesFromSchema();
+      service.populate();
+    }
+  }
 
   if (!isLoadingComplete) {
     return null;
   } else {
     return (
       <SafeAreaProvider>
-        <Navigation />
-        <StatusBar />
+        <RootContextWrap>
+          <Navigation />
+          <StatusBar />
+        </RootContextWrap>
       </SafeAreaProvider>
     );
   }

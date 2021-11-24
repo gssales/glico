@@ -5,8 +5,9 @@ import { RootStackScreenProps } from '../types';
 import { TextInputMask } from 'react-native-masked-text';
 import moment from 'moment';
 import { Picker } from '@react-native-picker/picker';
+import DropDownPicker from 'react-native-dropdown-picker';
 import { useState } from 'react';
-
+import { RootContext } from '../components/RootContext/RootContext';
 const getCurrentDate = () => {
 
   var date = new Date().getDate();
@@ -21,12 +22,20 @@ export default function EditEntryScreen({ navigation }: RootStackScreenProps<'Ed
   const [time, setTime] = React.useState<string>(moment().format("HH:mm"))
   const [date, setDate] = React.useState<string>(getCurrentDate().toString())
   const [glicose, setGlicose] = React.useState<string>('0')
-  const [carbohydrates, setCarbohydrates] = React.useState<string>('0')
+  const [carbohydrates, setCarbohydrates] = React.useState<string>(calculateTotalCarbs().toString())
   const [mealSelected, setMealSelected] = React.useState<string>('')
-  const [insulinMeal, setInsulinMeal] = React.useState<string>('')
-  const [insulinCorrection, setInsulinCorrection] = React.useState<string>('')
+  const [insulinMeal, setInsulinMeal] = React.useState<string>('0')
+  const [insulinCorrection, setInsulinCorrection] = React.useState<string>('0')
   const [notes, setNotes] = React.useState<string>('')
   const [tags, setTags] = React.useState<string>('')
+  const { meal } = React.useContext(RootContext)
+
+  function calculateTotalCarbs(): number {
+    if (meal) {
+      return meal?.foodList.reduce((acc, curr) => acc + curr.amount * curr.food.carbs, 0);
+    }
+    return 0
+  }
 
   return (
     <View style={styles.container}>
@@ -62,6 +71,7 @@ export default function EditEntryScreen({ navigation }: RootStackScreenProps<'Ed
             style={styles.input}
             value={glicose}
             onChangeText={setGlicose}
+            keyboardType="numeric"
           />
           <Text> mg/Dl</Text>
         </View>
@@ -77,12 +87,14 @@ export default function EditEntryScreen({ navigation }: RootStackScreenProps<'Ed
                 style={styles.input}
                 value={carbohydrates}
                 onChangeText={setCarbohydrates}
+                keyboardType="numeric"
               />
               <Text> g</Text>
             </View>
           </View>
 
           <View style={styles.flexRow}>
+
             <Picker
               style={{
                 height: 32,
@@ -91,8 +103,11 @@ export default function EditEntryScreen({ navigation }: RootStackScreenProps<'Ed
               selectedValue={mealSelected}
               onValueChange={(itemValue, itemIndex) => setMealSelected(itemValue)
               }>
+              <Picker.Item label="Desjejum" value="desjejum" />
               <Picker.Item label="Almoço" value="almoço" />
-              <Picker.Item label="Janta" value="janta" />
+              <Picker.Item label="Lanche" value="lanche" />
+              <Picker.Item label="Jantar" value="janta" />
+              <Picker.Item label="Ceia" value="ceia" />
             </Picker>
 
             <TouchableOpacity
@@ -106,6 +121,7 @@ export default function EditEntryScreen({ navigation }: RootStackScreenProps<'Ed
                 backgroundColor: '#1A73E9',
                 borderRadius: 50,
               }}
+              onPress={() => navigation.navigate('MealBuilder')}
             >
               <Text
                 style={styles.editMealButtonText}>
@@ -133,6 +149,7 @@ export default function EditEntryScreen({ navigation }: RootStackScreenProps<'Ed
                 style={styles.input}
                 value={insulinMeal}
                 onChangeText={setInsulinMeal}
+                keyboardType="numeric"
               />
               <Text> U</Text>
             </View>
@@ -149,6 +166,7 @@ export default function EditEntryScreen({ navigation }: RootStackScreenProps<'Ed
                 style={styles.input}
                 value={insulinCorrection}
                 onChangeText={setInsulinCorrection}
+                keyboardType="numeric"
               />
               <Text> U</Text>
             </View>
@@ -246,7 +264,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     width: '100%',
-    gap: 10
+    padding: 10
   },
   editMealButton: {
     borderRadius: 50,

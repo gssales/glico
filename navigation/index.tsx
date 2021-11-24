@@ -3,22 +3,16 @@
  * https://reactnavigation.org/docs/getting-started
  *
  */
-import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
-import { Pressable } from 'react-native';
-import { View } from '../components/Themed';
 
 import Colors from '../constants/Colors';
 import DashboardScreen from '../screens/DashboardScreen';
-import ModalScreen from '../screens/ModalScreen';
 import EditEntryScreen from '../screens/EditEntryScreen';
-import NotFoundScreen from '../screens/NotFoundScreen';
-import TabOneScreen from '../screens/TabOneScreen';
-import TabTwoScreen from '../screens/TabTwoScreen';
-import { RootStackParamList, RootStackScreenProps, RootTabParamList, RootTabScreenProps } from '../types';
+import { RootStackParamList, RootTabParamList, RootStackScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 import ViewEntryScreen from '../screens/ViewEntryScreen';
 import MealBuilderScreen from '../screens/MealBuilderScreen';
@@ -27,6 +21,7 @@ import UserRegisterScreen from '../screens/UserRegisterScreen';
 import CalculatorScreen from '../screens/CalculatorScreen';
 import HistoryScreen from '../screens/HistoryScreen';
 import UserProfileScreen from '../screens/UserProfileScreen';
+import { Pressable } from 'react-native';
 
 export default function Navigation() {
   return (
@@ -80,8 +75,23 @@ function RootNavigator() {
           ),
         })} />
       <Stack.Screen name="ViewEntry" component={ViewEntryScreen} options={{ title: 'Detalhes do Registro' }} />
-      <Stack.Screen name="MealBuilder" component={MealBuilderScreen} options={{ title: 'Refeição' }} />
-      <Stack.Screen name="FoodFinder" component={FoodFinderScreen} options={{ title: 'Escolher Alimento' }} />
+      <Stack.Screen 
+        name="MealBuilder" 
+        component={MealBuilderScreen} 
+        options={{ 
+          title: 'Refeição',
+          headerTintColor: 'white',
+          headerStyle: { backgroundColor: Colors.blue },
+          headerBackVisible: false,
+        }} />
+      <Stack.Screen 
+        name="FoodFinder"
+        component={FoodFinderScreen}
+        options={{ 
+          title: 'Escolher Alimento',
+          headerTintColor: 'white',
+          headerStyle: { backgroundColor: Colors.blue },
+        }} />
       <Stack.Screen name="UserRegister" component={UserRegisterScreen} options={{ title: 'Cadastro de Usuário' }} />
     </Stack.Navigator>
   );
@@ -99,15 +109,38 @@ function BottomTabNavigator() {
     <BottomTab.Navigator
       initialRouteName="Dashboard"
       screenOptions={{
-        tabBarActiveTintColor: Colors.tint,
+        tabBarStyle: { backgroundColor: Colors.blue },
+        tabBarInactiveTintColor: "#bbb",
+        tabBarActiveTintColor: 'white',
       }}>
-      <BottomTab.Screen
-        name="Dashboard"
-        component={DashboardScreen}
-        options={{ headerShown: false }} />
-      <BottomTab.Screen name="Calculator" component={CalculatorScreen} />
-      <BottomTab.Screen name="History" component={HistoryScreen} />
-      <BottomTab.Screen name="UserProfile" component={UserProfileScreen} />
+        <BottomTab.Screen
+          name="Dashboard"
+          component={DashboardScreen}
+          options={{ 
+            headerShown: false,
+            tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />
+          }} />
+        <BottomTab.Screen 
+          name="Calculator" 
+          component={CalculatorScreen}
+          options={{ 
+            headerShown: false,
+            tabBarIcon: ({ color }) => <TabBarIcon name="calculate" color={color} />
+          }} />
+        <BottomTab.Screen 
+          name="History" 
+          component={HistoryScreen}
+          options={{ 
+            headerShown: false,
+            tabBarIcon: ({ color }) => <TabBarIcon name="assessment" color={color} />
+          }} />
+        <BottomTab.Screen 
+          name="UserProfile"
+          component={UserProfileScreen}
+          options={{ 
+            headerShown: false,
+            tabBarIcon: ({ color }) => <TabBarIcon name="face" color={color} />
+          }} />
       {/* <BottomTab.Screen
         name="TabOne"
         component={TabOneScreen}
@@ -146,8 +179,8 @@ function BottomTabNavigator() {
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
  */
 function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name'];
+  name: React.ComponentProps<typeof MaterialIcons>['name'];
   color: string;
 }) {
-  return <FontAwesome size={30} style={{ marginBottom: -3 }} {...props} />;
+  return <MaterialIcons size={30} style={{ marginBottom: -3 }} {...props} />;
 }

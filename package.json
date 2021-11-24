@@ -36,11 +36,15 @@
     "react-native-date-picker": "^4.1.1",
     "react-native-maps": "0.28.1",
     "react-native-masked-text": "^1.13.0",
+    "react-simple-timefield": "^3.2.5",
+    "xcode": "^3.0.1",
+    "react-native-chart-kit": "^6.11.0",
+    "react-native-dropdown-picker": "^5.2.3",
+    "react-native-elements": "^3.4.2",
     "react-native-safe-area-context": "3.3.2",
     "react-native-screens": "~3.8.0",
-    "react-native-web": "0.17.1",
-    "react-simple-timefield": "^3.2.5",
-    "xcode": "^3.0.1"
+    "react-native-svg": "^12.1.1",
+    "react-native-web": "0.17.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
