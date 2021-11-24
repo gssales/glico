@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { Button, Dimensions, StyleSheet } from 'react-native';
+import React from 'react';
+import { Dimensions, StyleSheet } from 'react-native';
 
 import { Text, View, Chart } from '../components/Themed';
 import Colors from '../constants/Colors';
@@ -41,7 +41,7 @@ export default function DashboardScreen({ navigation }: RootTabScreenProps<'Dash
         color={'#1BB55C'} 
         placement='right' 
         title={<MaterialIcons name="add" color="#fff" size={30}/>}
-        onPress={() => navigation.navigate('EditEntry')}/>
+        onPress={() => navigation.navigate('MealBuilder')}/>
     </View>
   )
 }

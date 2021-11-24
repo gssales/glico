@@ -17,11 +17,11 @@ export default class SQLiteManager {
     return db;
   }
 
-  async runQuery(query: string): Promise<any> {
+  async runQuery(query: string, args: string[] = []): Promise<any> {
     return new Promise<any> ((resolve, reject) => {
       try {
         const db = this.openConnection();
-        db.exec([{ sql: query, args: [] }], false, (error, resultSet) => {
+        db.exec([{ sql: query, args: args }], false, (error, resultSet) => {
           if (resultSet)
             resolve(resultSet);
           else
