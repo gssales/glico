@@ -5,8 +5,6 @@ import { RootStackScreenProps } from '../types';
 import { TextInputMask } from 'react-native-masked-text';
 import moment from 'moment';
 import { Picker } from '@react-native-picker/picker';
-import DropDownPicker from 'react-native-dropdown-picker';
-import { useState } from 'react';
 import { RootContext } from '../components/RootContext/RootContext';
 const getCurrentDate = () => {
 

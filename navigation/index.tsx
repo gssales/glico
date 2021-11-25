@@ -41,7 +41,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
   return (
-    <Stack.Navigator initialRouteName="EditEntry">
+    <Stack.Navigator initialRouteName="UserRegister">
       <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
       <Stack.Screen name="EditEntry" component={EditEntryScreen}
         options={({ navigation }: RootStackScreenProps<'EditEntry'>) => ({
@@ -75,24 +75,45 @@ function RootNavigator() {
           ),
         })} />
       <Stack.Screen name="ViewEntry" component={ViewEntryScreen} options={{ title: 'Detalhes do Registro' }} />
-      <Stack.Screen 
-        name="MealBuilder" 
-        component={MealBuilderScreen} 
-        options={{ 
+      <Stack.Screen
+        name="MealBuilder"
+        component={MealBuilderScreen}
+        options={{
           title: 'Refeição',
           headerTintColor: 'white',
           headerStyle: { backgroundColor: Colors.blue },
           headerBackVisible: false,
         }} />
-      <Stack.Screen 
+      <Stack.Screen
         name="FoodFinder"
         component={FoodFinderScreen}
-        options={{ 
+        options={{
           title: 'Escolher Alimento',
           headerTintColor: 'white',
           headerStyle: { backgroundColor: Colors.blue },
         }} />
-      <Stack.Screen name="UserRegister" component={UserRegisterScreen} options={{ title: 'Cadastro de Usuário' }} />
+      <Stack.Screen 
+      name="UserRegister" 
+      component={UserRegisterScreen} 
+      options={({ navigation }: RootStackScreenProps<'UserRegister'>) => ({
+        title: 'Cadastro de Usuário',
+        headerBackVisible: false,
+        headerStyle: { backgroundColor: Colors.blue },
+        headerRight: () => (
+          <Pressable
+            onPress={() => navigation.navigate('Root')}
+            style={({ pressed }) => ({
+              opacity: pressed ? 0.5 : 1,
+            })}>
+            <MaterialIcons
+              name="save"
+              size={25}
+              color={Colors.text}
+              style={{ marginRight: 15 }} />
+          </Pressable>
+        ),
+      })} 
+      />
     </Stack.Navigator>
   );
 }
@@ -113,34 +134,34 @@ function BottomTabNavigator() {
         tabBarInactiveTintColor: "#bbb",
         tabBarActiveTintColor: 'white',
       }}>
-        <BottomTab.Screen
-          name="Dashboard"
-          component={DashboardScreen}
-          options={{ 
-            headerShown: false,
-            tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />
-          }} />
-        <BottomTab.Screen 
-          name="Calculator" 
-          component={CalculatorScreen}
-          options={{ 
-            headerShown: false,
-            tabBarIcon: ({ color }) => <TabBarIcon name="calculate" color={color} />
-          }} />
-        <BottomTab.Screen 
-          name="History" 
-          component={HistoryScreen}
-          options={{ 
-            headerShown: false,
-            tabBarIcon: ({ color }) => <TabBarIcon name="assessment" color={color} />
-          }} />
-        <BottomTab.Screen 
-          name="UserProfile"
-          component={UserProfileScreen}
-          options={{ 
-            headerShown: false,
-            tabBarIcon: ({ color }) => <TabBarIcon name="face" color={color} />
-          }} />
+      <BottomTab.Screen
+        name="Dashboard"
+        component={DashboardScreen}
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />
+        }} />
+      <BottomTab.Screen
+        name="Calculator"
+        component={CalculatorScreen}
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ color }) => <TabBarIcon name="calculate" color={color} />
+        }} />
+      <BottomTab.Screen
+        name="History"
+        component={HistoryScreen}
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ color }) => <TabBarIcon name="assessment" color={color} />
+        }} />
+      <BottomTab.Screen
+        name="UserProfile"
+        component={UserProfileScreen}
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ color }) => <TabBarIcon name="face" color={color} />
+        }} />
       {/* <BottomTab.Screen
         name="TabOne"
         component={TabOneScreen}
